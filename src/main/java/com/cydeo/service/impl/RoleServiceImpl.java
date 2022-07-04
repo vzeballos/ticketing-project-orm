@@ -1,37 +1,38 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.RoleDTO;
+import com.cydeo.entity.Role;
+import com.cydeo.repository.RoleRepository;
 import com.cydeo.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class RoleServiceImpl extends AbstractMapService<RoleDTO, Long> implements RoleService {
+public class RoleServiceImpl implements RoleService {
 
-    @Override
-    public RoleDTO save(RoleDTO object) {
-        return super.save(object.getId(), object);
+    private final RoleRepository roleRepository;
+
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
     @Override
-    public List<RoleDTO> findAll() {
-        return super.findAll();
-    }
+    public List<RoleDTO> listAllRoles() {
 
-    @Override
-    public void deleteById(Long id) {
-        super.deleteById(id);
-    }
+        //controller calling me and requesting all the roles
+        //so I need to go to DB and bring all the roles from there
 
-    @Override
-    public void update(RoleDTO object) {
-        super.update(object.getId(), object);
+        List<Role> roleList = roleRepository.findAll();
+
+        //convert entity to dto Mapper
+
+
+        return roleList;
     }
 
     @Override
     public RoleDTO findById(Long id) {
-        return super.findById(id);
+        return null;
     }
-
 }
